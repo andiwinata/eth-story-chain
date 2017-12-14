@@ -1,6 +1,6 @@
 # eth-story-chain
 
-> Peer 2 peer lending in ethereum
+> Story chain based on ethereum
 
 ## Build Setup
 
