@@ -1,0 +1,42 @@
+{
+  "name": "eth-story-chain",
+  "version": "1.0.0",
+  "description": "Ethereum story chain",
+  "author": "andiwinata <andi.winata@hotmail.com>",
+  "private": true,
+  "scripts": {
+    "deploy": "push-dir --dir=dist --branch=gh-pages --cleanup",
+    "dev": "nuxt --spa",
+    "build": "nuxt build",
+    "build-gh": "cross-env DEPLOY_ENV=GH_PAGES nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate",
+    "generate-gh": "cross-env DEPLOY_ENV=GH_PAGES nuxt generate",
+    "gh-pages": "yarn run build-gh && yarn run deploy",
+    "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
+    "precommit": "npm run lint",
+    "format": "prettier --config .prettierrc --write \"**/*.js\""
+  },
+  "dependencies": {
+    "bulma": "^0.6.1",
+    "nuxt": "^1.0.0-rc11"
+  },
+  "devDependencies": {
+    "babel-eslint": "^7.2.3",
+    "cross-env": "^5.1.1",
+    "eslint": "^4.3.0",
+    "eslint-config-prettier": "^2.9.0",
+    "eslint-config-standard": "^10.2.1",
+    "eslint-loader": "^1.9.0",
+    "eslint-plugin-html": "^3.1.1",
+    "eslint-plugin-import": "^2.7.0",
+    "eslint-plugin-node": "^5.1.1",
+    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-standard": "^3.0.1",
+    "node-sass": "^4.7.2",
+    "prettier": "^1.9.1",
+    "push-dir": "^0.4.1",
+    "sass-loader": "^6.0.6",
+    "zeppelin-solidity": "^1.4.0"
+  }
+}
