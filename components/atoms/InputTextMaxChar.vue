@@ -1,5 +1,12 @@
 <template>
-  <input class="input" type="text" v-model="sentenceInput" @keypress="onInput" :placeholder="placeholderComputed" />
+  <input
+    class="input"
+    type="text"
+    @input="onInput"
+    @keypress="onKeypress"
+    :placeholder="placeholderComputed"
+    :value="value"
+  />
 </template>
 
 <script>
@@ -12,13 +19,11 @@ export default {
       )
     }
   },
-  data() {
-    return {
-      sentenceInput: ''
-    }
-  },
   methods: {
     onInput(e) {
+      this.$emit('input', e.target.value)
+    },
+    onKeypress(e) {
       if (e.target.value.length >= this.maxCharacters) {
         e.preventDefault()
       }
@@ -26,7 +31,9 @@ export default {
   },
   props: {
     maxCharacters: { default: defaultMaxCharacters, type: Number },
-    placeholder: { type: String }
+    placeholder: { type: String },
+    // use the value props from the parent
+    value: { default: '', type: String }
   }
 }
 </script>

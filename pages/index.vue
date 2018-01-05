@@ -9,7 +9,7 @@
         Story chain based on ethereum
       </h2>
       <listing-table />
-      <sentence-form />
+      <sentence-chain />
     </div>
   </section>
 </template>
@@ -17,13 +17,13 @@
 <script>
 import Logo from '~/components/atoms/Logo.vue'
 import ListingTable from '~/components/organisms/ListingTable.vue'
-import SentenceForm from '~/components/organisms/SentenceForm.vue'
+import SentenceChain from '~/components/organisms/SentenceChain.vue'
 
 export default {
   components: {
     Logo,
     ListingTable,
-    SentenceForm,
+    SentenceChain,
   }
 }
 </script>
