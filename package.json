@@ -37,6 +37,7 @@
     "prettier": "^1.9.1",
     "push-dir": "^0.4.1",
     "sass-loader": "^6.0.6",
+    "truffle-contract": "^3.0.2",
     "zeppelin-solidity": "^1.4.0"
   }
 }
