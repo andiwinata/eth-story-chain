@@ -4,9 +4,10 @@
 
 <script>
 import SentenceForm from '~/components/organisms/SentenceForm.vue'
+import SentenceChain from '~/build/contracts/SentenceChain.json'
 
 import Web3 from 'web3'
-// import contract from 'truffle-contract'
+import contract from 'truffle-contract'
 
 export default {
   components: {
@@ -20,6 +21,7 @@ export default {
       }
 
       console.warn('Using web3 detected from external source like Metamask')
+      console.log('SENTENCE CHAIN IS', SentenceChain, '\n', contract);
       // Use Mist/MetaMask's provider
       window.web3 = new Web3(window.web3.currentProvider)
     },
