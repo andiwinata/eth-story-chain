@@ -8,3 +8,19 @@ let inst
 SentenceChain.deployed().then(x => (inst = x))
 
 inst.createSentence(web3.fromAscii('hello'), 0)
+
+inst.SentenceCreated({}, { fromBlock: 0, toBlock: 'latest' })
+	.get((error, eventResult) => {
+		if (error)
+			console.log('Error in myEvent event handler: ' + error);
+		else
+			console.log('myEvent: ' + JSON.stringify(eventResult.args));
+	});
+
+inst.SentenceCreated({}, { fromBlock: 0, toBlock: 'latest' }, (error, eventResult) => {
+	if (error)
+		console.log('Error in myEvent event handler: ' + error);
+	else
+		console.log('myEvent: ' + JSON.stringify(eventResult.args));
+})
+
