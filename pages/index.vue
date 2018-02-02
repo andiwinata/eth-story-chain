@@ -1,14 +1,14 @@
 <template>
   <section class="container is-widescreen">
     <div>
-      <logo/>
+      <!-- <logo/> -->
       <h1 class="title">
         eth-story-chain
       </h1>
       <h2 class="subtitle">
         Story chain based on ethereum
       </h2>
-      <listing-table />
+      <!-- <listing-table /> -->
       <sentence-chain />
     </div>
   </section>
