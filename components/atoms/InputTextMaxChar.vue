@@ -10,6 +10,8 @@
 </template>
 
 <script>
+// TODO, fix copy paste issue where you can exceed the character
+
 const defaultMaxCharacters = 5
 export default {
   computed: {
@@ -21,6 +23,10 @@ export default {
   },
   methods: {
     onInput(e) {
+      // see https://vuejs.org/v2/guide/components.html#Form-Input-Components-using-Custom-Events
+      // for more details
+      // so basically the parent needs to have v-model attached to them
+      // and v-model makes the parent component to listen to 'input'
       this.$emit('input', e.target.value)
     },
     onKeypress(e) {

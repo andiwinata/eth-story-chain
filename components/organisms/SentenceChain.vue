@@ -2,7 +2,7 @@
   <div>
     <sentence-form @submitSentence="submitSentence"/>
     <ul>
-       <li v-for="(sentence, sentenceId) in sentences" :key="sentenceId">
+       <li v-for="(sentence, sentenceId) in sentenceTree" :key="sentenceId">
         {{sentenceId }} - {{ sentence }}
       </li>
     </ul>
@@ -10,33 +10,19 @@
 </template>
 
 <script>
-import SentenceForm from '~/components/organisms/SentenceForm.vue'
-import sentenceChainArtifacts from '~/build/contracts/SentenceChain.json'
-
 import Web3 from 'web3'
 import contract from 'truffle-contract'
+import { mapMutations, mapState } from 'vuex'
+import { ADD_SENTENCE_EVENT_RESULT } from '~/store/mutation-types'
+import SentenceForm from '~/components/organisms/SentenceForm.vue'
+import sentenceChainArtifacts from '~/build/contracts/SentenceChain.json'
 
 export default {
   components: {
     SentenceForm
   },
-  data() {
-    return {
-      sentences: {},
-    }
-  },
+  computed: mapState(['sentenceTree']),
   methods: {
-    addWatchResultToSentenceData(result) {
-      const { parentSentenceId, sentence, sentenceId } = result.args
-      this.$set(this.sentences, sentenceId.toString(), window.web3.toAscii(sentence).replace(/\0/g, ''))
-      console.log(
-        'processed sentence',
-        parentSentenceId.toString(),
-        window.web3.toAscii(sentence),
-        window.web3.toAscii(sentence).replace(/\0/g, ''),
-        sentenceId.toString()
-      )
-    },
     async initSentenceChain() {
       if (typeof window.web3 === 'undefined') {
         window.alert('There is no web3 detected, please install Mist/Metamask')
@@ -69,7 +55,7 @@ export default {
       )
       this.SentenceCreatedEvent.watch((error, result) => {
         if (!error) {
-          this.addWatchResultToSentenceData(result)
+          this[ADD_SENTENCE_EVENT_RESULT]({ result })
         } else {
           console.log('there is error', error)
         }
@@ -79,7 +65,8 @@ export default {
       console.log('submitting snentece', sentence.length, 'hello')
       const inst = await this.SentenceChain.deployed()
       inst.createSentence(window.web3.fromAscii(sentence), 0)
-    }
+    },
+    ...mapMutations([ADD_SENTENCE_EVENT_RESULT])
   },
   mounted() {
     if (document.readyState === 'interactive') {
