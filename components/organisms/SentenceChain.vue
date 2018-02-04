@@ -30,7 +30,6 @@ export default {
       }
 
       console.warn('Using web3 detected from external source like Metamask')
-      console.log('SENTENCE CHAIN IS', sentenceChainArtifacts, '\n', contract)
       // Use Mist/MetaMask's provider
       window.web3 = new Web3(window.web3.currentProvider)
 
@@ -47,14 +46,15 @@ export default {
       window.SentenceChain = this.SentenceChain
 
       // watch for events
-      const inst = await this.SentenceChain.deployed()
+      this.inst = await this.SentenceChain.deployed()
 
-      this.SentenceCreatedEvent = inst.SentenceCreated(
+      this.SentenceCreatedEvent = this.inst.SentenceCreated(
         {},
-        { address: inst.address.toLowerCase(), fromBlock: 0, toBlock: 'latest' }
+        { address: this.inst.address.toLowerCase(), fromBlock: 0, toBlock: 'latest' }
       )
       this.SentenceCreatedEvent.watch((error, result) => {
         if (!error) {
+          // add the sentence log to store
           this[ADD_SENTENCE_EVENT_RESULT]({ result })
         } else {
           console.log('there is error', error)
@@ -63,8 +63,7 @@ export default {
     },
     async submitSentence(sentence) {
       console.log('submitting snentece', sentence.length, 'hello')
-      const inst = await this.SentenceChain.deployed()
-      inst.createSentence(window.web3.fromAscii(sentence), 0)
+      this.inst.createSentence(window.web3.fromAscii(sentence), 0)
     },
     ...mapMutations([ADD_SENTENCE_EVENT_RESULT])
   },
