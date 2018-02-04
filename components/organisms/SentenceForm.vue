@@ -9,7 +9,7 @@
        -->
       <input-text-max-char 
         class="is-large"
-        v-model="sentenceInput"
+        v-model="inputSentence"
         :maxCharacters="sentenceMaxCharacters"
       />
     </label>
@@ -21,26 +21,35 @@
 
 <script>
 import InputTextMaxChar from '~/components/atoms/InputTextMaxChar.vue'
+import { SET_INPUT_SENTENCE } from '~/store/mutation-types'
 
 export default {
   components: {
     InputTextMaxChar
   },
+  computed: {
+    // create v-model from vuex state
+    // https://stackoverflow.com/questions/42755289/vuex-input-with-v-model-not-reactive
+    inputSentence: {
+      get() {
+        return this.$store.state.inputSentence
+      },
+      set(value) {
+        this.$store.commit(SET_INPUT_SENTENCE, { inputSentence: value })
+      }
+    }
+  },
   data() {
     return {
-      sentenceInput: '',
-      sentenceMaxCharacters: 32,
+      sentenceMaxCharacters: 32
     }
   },
   methods: {
-    onSentenceInput(sentenceInput) {
-      // this.sentenceInput = sentenceInput
-    },
     onSubmit() {
-      // emit submit event
-      this.$emit('submitSentence', this.sentenceInput)
+      // emit submit event for parent component
+      this.$emit('onSubmitSentence')
       // then reset the input
-      this.sentenceInput = ''
+      this.inputSentence = ''
       return false
     }
   }

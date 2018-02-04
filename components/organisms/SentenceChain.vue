@@ -1,6 +1,6 @@
 <template>
   <div>
-    <sentence-form @submitSentence="submitSentence"/>
+    <sentence-form @onSubmitSentence="onSubmitSentence"/>
     <ul>
        <li v-for="(sentence, sentenceId) in sentenceTree" :key="sentenceId">
         {{sentenceId }} - {{ sentence }}
@@ -21,7 +21,7 @@ export default {
   components: {
     SentenceForm
   },
-  computed: mapState(['sentenceTree']),
+  computed: mapState(['sentenceTree', 'inputSentence']),
   methods: {
     async initSentenceChain() {
       if (typeof window.web3 === 'undefined') {
@@ -61,9 +61,9 @@ export default {
         }
       })
     },
-    async submitSentence(sentence) {
-      console.log('submitting snentece', sentence.length, 'hello')
-      this.inst.createSentence(window.web3.fromAscii(sentence), 0)
+    async onSubmitSentence() {
+      console.log('submitting sentence', this.inputSentence.length)
+      this.inst.createSentence(window.web3.fromAscii(this.inputSentence), 0)
     },
     ...mapMutations([ADD_SENTENCE_EVENT_RESULT])
   },
