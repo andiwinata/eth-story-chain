@@ -21,7 +21,7 @@ export default {
   components: {
     SentenceForm
   },
-  computed: mapState(['sentenceTree', 'inputSentence']),
+  computed: mapState(['sentenceTree', 'inputSentence', 'inputParentSentenceId']),
   methods: {
     async initSentenceChain() {
       if (typeof window.web3 === 'undefined') {
@@ -62,8 +62,8 @@ export default {
       })
     },
     async onSubmitSentence() {
-      console.log('submitting sentence', this.inputSentence.length)
-      this.inst.createSentence(window.web3.fromAscii(this.inputSentence), 0)
+      console.log('submitting sentence', this.inputParentSentenceId)
+      this.inst.createSentence(window.web3.fromAscii(this.inputSentence), this.inputParentSentenceId || 0)
     },
     ...mapMutations([ADD_SENTENCE_EVENT_RESULT])
   },

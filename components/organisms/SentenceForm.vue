@@ -1,6 +1,6 @@
 <template>
-  <form action="" @submit.prevent="onSubmit" >
-    <label class="label">
+  <form action="" @submit.prevent="onSubmit" class="field has-addons">
+    <label class="label control is-expanded">
       <span class="sentence-label">Sentence</span>
       <!--
         use v-model for binding the input data
@@ -13,7 +13,11 @@
         :maxCharacters="sentenceMaxCharacters"
       />
     </label>
-    <button class="button is-primary is-large" type="submit">
+    <label class="label control">
+      <span class="parent-sentence-id-label">Parent sentence id</span>
+      <input class="input is-large" type="text" v-model="inputParentSentenceId" placeholder="Enter Parent Sentence Id"/>
+    </label>
+    <button class="button is-primary is-large control" type="submit">
       Create sentence
     </button>
   </form>
@@ -21,7 +25,7 @@
 
 <script>
 import InputTextMaxChar from '~/components/atoms/InputTextMaxChar.vue'
-import { SET_INPUT_SENTENCE } from '~/store/mutation-types'
+import { SET_INPUT_PARENT_SENTENCE_ID, SET_INPUT_SENTENCE } from '~/store/mutation-types'
 
 export default {
   components: {
@@ -30,6 +34,14 @@ export default {
   computed: {
     // create v-model from vuex state
     // https://stackoverflow.com/questions/42755289/vuex-input-with-v-model-not-reactive
+    inputParentSentenceId: {
+      get() {
+        return this.$store.state.inputParentSentenceId
+      },
+      set(value) {
+        this.$store.commit(SET_INPUT_PARENT_SENTENCE_ID, { inputParentSentenceId: value })
+      }
+    },
     inputSentence: {
       get() {
         return this.$store.state.inputSentence
@@ -59,6 +71,7 @@ export default {
 <style lang="scss" scoped>
 @import 'assets/scss/mixins.scss';
 
+.parent-sentence-id-label,
 .sentence-label {
   @include visually-hidden();
 }
