@@ -19,13 +19,19 @@ export const state = () => ({
 
 export const mutations = {
   [ADD_SENTENCE_EVENT_RESULT](state, { result }) {
-    const { parentSentenceId, sentence, sentenceId } = result.args
-    // mutating state with new sentence
+    const parentSentenceId = result.args.parentSentenceId.toString()
+    const sentenceId = result.args.sentenceId.toString()
+    const sentence = window.web3.toAscii(result.args.sentence).replace(/\0/g, '')
+
+    // adding new sentence to sentenceTree
     Vue.set(state.sentenceTree, sentenceId.toString(), createSentenceTreeNode({
-      sentence: window.web3.toAscii(sentence).replace(/\0/g, ''),
-      sentenceId: sentenceId.toString(),
-      parentSentenceId: parentSentenceId.toString()
+      sentence,
+      sentenceId,
+      parentSentenceId
     }))
+
+    // update the children of parentSentence
+    state.sentenceTree[parentSentenceId].children.push(sentenceId)
   },
   [SET_INPUT_PARENT_SENTENCE_ID](state, { inputParentSentenceId }) {
     state.inputParentSentenceId = inputParentSentenceId
