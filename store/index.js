@@ -5,7 +5,7 @@ const createSentenceTreeNode = ({ sentence, sentenceId, parentSentenceId }) => (
   children: [],
   sentence,
   sentenceId,
-  parentSentenceId,
+  parentSentenceId
 })
 
 export const state = () => ({
@@ -14,7 +14,7 @@ export const state = () => ({
   },
   inputParentSentenceId: '',
   inputSentence: '',
-  viewedSentenceId: {},
+  viewedSentenceId: {}
 })
 
 export const mutations = {
@@ -24,11 +24,15 @@ export const mutations = {
     const sentence = window.web3.toAscii(result.args.sentence).replace(/\0/g, '')
 
     // adding new sentence to sentenceTree
-    Vue.set(state.sentenceTree, sentenceId.toString(), createSentenceTreeNode({
-      sentence,
-      sentenceId,
-      parentSentenceId
-    }))
+    Vue.set(
+      state.sentenceTree,
+      sentenceId.toString(),
+      createSentenceTreeNode({
+        sentence,
+        sentenceId,
+        parentSentenceId
+      })
+    )
 
     // update the children of parentSentence
     state.sentenceTree[parentSentenceId].children.push(sentenceId)
@@ -38,5 +42,5 @@ export const mutations = {
   },
   [SET_INPUT_SENTENCE](state, { inputSentence }) {
     state.inputSentence = inputSentence
-  },
+  }
 }
