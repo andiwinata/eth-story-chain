@@ -2,7 +2,7 @@
   <section class="container is-widescreen">
     <div>
       <!-- <logo/> -->
-      <h1 class="title">
+      <h1 class="title is-size-1 has-text-weight-bold">
         eth-story-chain
       </h1>
       <h2 class="subtitle">
@@ -31,5 +31,6 @@ export default {
 <style lang="scss" scoped>
   .container {
     align-content: center;
+    margin-top: 1rem;
   }  
 </style>

@@ -1,5 +1,9 @@
 <template>
   <form action="" @submit.prevent="onSubmit" class="field has-addons">
+    <label class="label control">
+      <span class="parent-sentence-id-label">Parent sentence id</span>
+      <input class="input is-large" type="text" v-model="inputParentSentenceId" placeholder="Enter Parent Sentence Id"/>
+    </label>
     <label class="label control is-expanded">
       <span class="sentence-label">Sentence</span>
       <!--
@@ -12,10 +16,6 @@
         v-model="inputSentence"
         :maxCharacters="sentenceMaxCharacters"
       />
-    </label>
-    <label class="label control">
-      <span class="parent-sentence-id-label">Parent sentence id</span>
-      <input class="input is-large" type="text" v-model="inputParentSentenceId" placeholder="Enter Parent Sentence Id"/>
     </label>
     <button class="button is-primary is-large control" type="submit">
       Create sentence

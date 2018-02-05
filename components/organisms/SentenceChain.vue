@@ -1,6 +1,8 @@
 <template>
   <div>
     <sentence-form @onSubmitSentence="onSubmitSentence"/>
+    <hr />
+    <sentence />
     <ul>
        <li v-for="(sentence, sentenceId) in sentenceTree" :key="sentenceId">
         {{sentenceId }} - {{ sentence }}
@@ -15,11 +17,13 @@ import contract from 'truffle-contract'
 import { mapMutations, mapState } from 'vuex'
 import { ADD_SENTENCE_EVENT_RESULT } from '~/store/mutation-types'
 import SentenceForm from '~/components/organisms/SentenceForm.vue'
+import Sentence from '~/components/molecules/Sentence.vue'
 import sentenceChainArtifacts from '~/build/contracts/SentenceChain.json'
 
 export default {
   components: {
-    SentenceForm
+    Sentence,
+    SentenceForm,
   },
   computed: mapState(['sentenceTree', 'inputSentence', 'inputParentSentenceId']),
   methods: {
