@@ -5,9 +5,7 @@
         <i class="fas fa-2x fa-plus-square"></i>
       </span>
     </button>
-    <p :class="['sentence-wrap', 'is-size-3', 'has-text-weight-semibold', { 'is-italic has-text-grey-light': isDefault }]">
-      {{ isDefault ? 'Root sentence' : sentence }}
-    </p>
+    <p :class="classObject">{{ sentenceRender }}</p>
   </div>
 </template>
 
@@ -15,9 +13,11 @@
 import { SET_INPUT_PARENT_SENTENCE_ID } from '~/store/mutation-types'
 
 export default {
-  computed: {
-    isDefault() {
-      return this.sentenceId === '0'
+  data() {
+    const isDefault = this.sentenceId === '0'
+    return {
+      classObject: ['sentence-wrap', 'is-size-3', 'has-text-weight-semibold', { 'is-italic has-text-grey-light': isDefault }],
+      sentenceRender: isDefault ? 'Root sentence' : this.sentence
     }
   },
   methods: {
@@ -36,7 +36,7 @@ export default {
 
 <style lang="scss" scoped>
 .sentence-wrap {
-  display: inline-block;
+  display: inline;
   margin-left: 8px;
 }
 </style>

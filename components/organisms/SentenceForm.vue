@@ -18,7 +18,7 @@
       />
     </label>
     <button class="button is-primary is-large control" type="submit">
-      Create sentence
+      Chain sentence!
     </button>
   </form>
 </template>
