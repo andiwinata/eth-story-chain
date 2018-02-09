@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import { ADD_SENTENCE_EVENT_RESULT, SET_INPUT_PARENT_SENTENCE_ID, SET_INPUT_SENTENCE } from './mutation-types'
 
+// const MAX_VIEWED_SENTENCES = 3
+
 const createSentenceTreeNode = ({ sentence, sentenceId, parentSentenceId }) => ({
   children: [],
   sentence,
@@ -14,7 +16,7 @@ export const state = () => ({
   },
   inputParentSentenceId: '',
   inputSentence: '',
-  viewedSentenceId: {}
+  viewedSentences: ['0'],
 })
 
 export const mutations = {
