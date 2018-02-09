@@ -2,12 +2,7 @@
   <div>
     <sentence-form @onSubmitSentence="onSubmitSentence"/>
     <hr />
-    <sentence />
-    <ul>
-       <li v-for="(sentence, sentenceId) in sentenceTree" :key="sentenceId">
-        {{sentenceId }} - {{ sentence }}
-      </li>
-    </ul>
+    <sentence v-for="(sentenceNode, sentenceId) in sentenceTree" :key="sentenceId" v-bind="sentenceNode"/>
   </div>
 </template>
 

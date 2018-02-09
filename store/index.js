@@ -10,7 +10,7 @@ const createSentenceTreeNode = ({ sentence, sentenceId, parentSentenceId }) => (
 
 export const state = () => ({
   sentenceTree: {
-    '0': createSentenceTreeNode({ sentence: '', sentenceId: 0, parentSentenceId: 0 })
+    '0': createSentenceTreeNode({ sentence: '', sentenceId: '0', parentSentenceId: '0' })
   },
   inputParentSentenceId: '',
   inputSentence: '',
