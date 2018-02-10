@@ -1,7 +1,7 @@
 <template>
   <ul>
-    <li class="sentence-sibling" v-for="childNode in childrenSentenceNodes" :key="childNode.sentenceId">
-      <sentence v-bind="childNode" />
+    <li class="sentence-wrapper" v-for="childNode in childrenSentenceNodes" :key="childNode.sentenceId">
+      <sentence :class="{ isDefault: childNode.sentenceId === defaultSentenceId }" v-bind="childNode" />
     </li>
   </ul>
 </template>
@@ -25,15 +25,20 @@ export default {
     }
   }),
   props: {
-    parentSentenceId: { type: String }
+    parentSentenceId: { type: String },
+    defaultSentenceId: { type: String },
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.sentence-sibling {
+.sentence-wrapper {
   display: inline;
   margin-right: 16px;
+}
+
+.isDefault {
+  color: red;
 }
 </style>
 

@@ -2,12 +2,8 @@
   <div>
     <sentence-form @onSubmitSentence="onSubmitSentence"/>
     <hr />
-    <!-- <sentence v-for="(sentenceNode, sentenceId) in sentenceTree" :key="sentenceId" v-bind="sentenceNode"/> -->
-    <!-- <sentence id=state.viewedSentences[0] />
-    <sentence-siblings parentSentenceId="state.viewedSentences[1] || state.viewedSentences[0].children[0]" />
-    <sentence-siblings parentSentenceId="state.viewedSentences[2] || state.viewedSentences[1] && state.viewedSentences[1].children[0] || stateTree[state.viewedSentences[0].children[0]].children[0]" /> -->
-    
-    <sentence-siblings parentSentenceId="0" />
+    <sentence-chain-viewer />
+    <!-- <sentence-siblings parentSentenceId="0" /> -->
   </div>
 </template>
 
@@ -17,6 +13,7 @@ import contract from 'truffle-contract'
 import { mapMutations, mapState } from 'vuex'
 import { ADD_SENTENCE_EVENT_RESULT } from '~/store/mutation-types'
 import SentenceForm from '~/components/organisms/SentenceForm.vue'
+import SentenceChainViewer from '~/components/organisms/SentenceChainViewer.vue'
 import Sentence from '~/components/molecules/Sentence.vue'
 import SentenceSiblings from '~/components/molecules/SentenceSiblings.vue'
 import sentenceChainArtifacts from '~/build/contracts/SentenceChain.json'
@@ -24,8 +21,9 @@ import sentenceChainArtifacts from '~/build/contracts/SentenceChain.json'
 export default {
   components: {
     Sentence,
+    SentenceChainViewer,
     SentenceForm,
-    SentenceSiblings,
+    SentenceSiblings
   },
   computed: mapState(['sentenceTree', 'inputSentence', 'inputParentSentenceId']),
   methods: {
