@@ -48,7 +48,7 @@ export default {
         // console.log('parentSentenceNode', parentSentenceNode, childrenIds.length)
         const childSentenceId =
           // get the default child if exist
-          this.$store.state.sentencesDefaultChildId[parentSentenceNode.sentenceId] ||
+          this.$store.state.sentenceTreeView[parentSentenceNode.sentenceId] ||
           // otherwise randomly pick one
           childrenIds[randomIntFromInterval(0, childrenIds.length)]
 
