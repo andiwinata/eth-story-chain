@@ -1,7 +1,7 @@
 <template>
   <ul>
     <li class="sentence-wrapper" v-for="childNode in childrenSentenceNodes" :key="childNode.sentenceId">
-      <sentence :class="{ isDefault: childNode.sentenceId === defaultSentenceId }" v-bind="childNode" />
+      <sentence :class="{ 'is-selected': childNode.sentenceId === selectedChildNode }" v-bind="childNode" />
     </li>
   </ul>
 </template>
@@ -22,6 +22,9 @@ export default {
       }
       
       return parentNode.children.map(childId => state.sentenceTree[childId])
+    },
+    selectedChildNode(state) {
+      return state.sentenceTreeView[this.parentSentenceId].viewedChildId
     }
   }),
   props: {
@@ -37,7 +40,7 @@ export default {
   margin-right: 16px;
 }
 
-.isDefault {
+.is-selected {
   color: red;
 }
 </style>

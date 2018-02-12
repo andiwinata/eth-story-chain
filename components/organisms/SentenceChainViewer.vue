@@ -4,10 +4,9 @@
     <sentence v-bind="currentViewedSentenceNode" />
     <!-- show the rest of tree levels as sentence-siblings -->
     <sentence-siblings
-      v-for="sentenceNode in viewedSentences"
-      :key="sentenceNode.sentenceId"
-      :parentSentenceId="sentenceNode.parentSentenceId"
-      :defaultSentenceId="sentenceNode.sentenceId"
+      v-for="sentenceId in shownSentenceSiblings"
+      :key="sentenceId"
+      :parentSentenceId="sentenceId"
     />
   </section>  
 </template>
@@ -30,6 +29,21 @@ export default {
   },
   computed: {
     ...mapGetters(['currentViewedSentenceNode']),
+    shownSentenceSiblings() {
+      const ids = [this.$store.state.currentViewedSentenceId]
+
+      for (let i = 0; i < TOTAL_DEPTH_SHOWN - 2; i++) {
+        const previousSentenceTreeNode = this.$store.state.sentenceTreeView[ids[i]]
+        const nextId = previousSentenceTreeNode.viewedChildId
+        if (!nextId) {
+          break
+        }
+        ids.push(nextId)
+      }
+
+      return ids
+    },
+    // TODO: REMOVE
     viewedSentences() {
       const shownSentenceNodes = []
       let parentSentenceNode = this.$store.getters.currentViewedSentenceNode
