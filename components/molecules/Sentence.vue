@@ -23,7 +23,7 @@ export default {
       classObject: [
         'sentence-wrap',
         'is-size-3',
-        'has-text-weight-semibold',
+        'has-text-weight-light',
         { 'is-italic has-text-grey-light': isDefault }
       ],
       sentenceRender: isDefault ? 'Root sentence' : this.sentence

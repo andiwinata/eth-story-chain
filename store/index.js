@@ -13,7 +13,7 @@ const createSentenceTreeNode = ({ sentence, sentenceId, parentSentenceId }) => (
   parentSentenceId
 })
 
-const createSentenceViewNode = ({ viewedChildId = undefined, randomizeViewedChildIdOnView = true }) => ({
+const createSentenceViewNode = ({ viewedChildId = undefined, randomizeViewedChildIdOnView = true } = {}) => ({
   viewedChildId,
   randomizeViewedChildIdOnView,
 })
@@ -29,7 +29,8 @@ const addChildToSentenceViewNode = ({ sentenceViewNode, sentenceChildren, childI
   // if the randomize flag is still true, and we are adding new child
   // randomize it again among all children including the new one added
   if (sentenceViewNode.randomizeViewedChildIdOnView) {
-    const selectedChildId = sentenceChildren[randomIntFromInterval(0, sentenceChildren.length)]
+    const randomChildIndex = randomIntFromInterval(0, sentenceChildren.length - 1)
+    const selectedChildId = sentenceChildren[randomChildIndex]
     sentenceViewNode.viewedChildId = selectedChildId
   }
 }
@@ -88,8 +89,6 @@ export const mutations = {
     // add the new sentence to the parentViewNode
     const parentViewNode = state.sentenceTreeView[parentSentenceId]
     addChildToSentenceViewNode({ sentenceViewNode: parentViewNode, sentenceChildren: parent.children, childId: sentenceId })
-
-    console.log('ADDING SENTENCE EVENT for ' + sentenceId, state.sentenceTree[parentSentenceId].children);
   },
   [SET_DEFAULT_CHILD_SENTENCE_ID](state, { sentenceId, defaultChildSentenceId }) {
     state.sentenceTreeView[sentenceId] = defaultChildSentenceId
