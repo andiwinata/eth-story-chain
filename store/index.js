@@ -1,5 +1,10 @@
 import Vue from 'vue'
-import { ADD_SENTENCE_EVENT_RESULT, SET_DEFAULT_CHILD_SENTENCE_ID, SET_INPUT_PARENT_SENTENCE_ID, SET_INPUT_SENTENCE } from './mutation-types'
+import {
+  ADD_SENTENCE_EVENT_RESULT,
+  SET_DEFAULT_CHILD_SENTENCE_ID,
+  SET_INPUT_PARENT_SENTENCE_ID,
+  SET_INPUT_SENTENCE
+} from './mutation-types'
 
 function randomIntFromInterval(min, max) {
   return Math.floor(Math.random() * (max - min + 1) + min)
@@ -15,7 +20,7 @@ const createSentenceTreeNode = ({ sentence, sentenceId, parentSentenceId }) => (
 
 const createSentenceViewNode = ({ viewedChildId = undefined, randomizeViewedChildIdOnView = true } = {}) => ({
   viewedChildId,
-  randomizeViewedChildIdOnView,
+  randomizeViewedChildIdOnView
 })
 
 const addChildToSentenceViewNode = ({ sentenceViewNode, sentenceChildren, childId }) => {
@@ -44,7 +49,7 @@ export const state = () => ({
   inputSentence: '',
   sentenceTreeView: {
     '0': createSentenceViewNode()
-  },
+  }
 })
 
 export const getters = {
@@ -88,7 +93,11 @@ export const mutations = {
 
     // add the new sentence to the parentViewNode
     const parentViewNode = state.sentenceTreeView[parentSentenceId]
-    addChildToSentenceViewNode({ sentenceViewNode: parentViewNode, sentenceChildren: parent.children, childId: sentenceId })
+    addChildToSentenceViewNode({
+      sentenceViewNode: parentViewNode,
+      sentenceChildren: parent.children,
+      childId: sentenceId
+    })
   },
   [SET_DEFAULT_CHILD_SENTENCE_ID](state, { sentenceId, defaultChildSentenceId }) {
     state.sentenceTreeView[sentenceId] = defaultChildSentenceId
