@@ -3,7 +3,7 @@
   -->{{ sentenceRender }}<!--
   --><button 
       @click="onClick"
-      class="chain-sentence-button button is-small is-white"
+      class="chain-sentence-button button is-small is-light"
       title="Chain this sentence"
     >
       <span class="icon has-text-primary">
